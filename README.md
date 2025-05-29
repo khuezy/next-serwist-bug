@@ -1,40 +1,32 @@
-# Serwist example - next-basic
+# Next Serwist Compiler Bug
 
-This example demonstrates how to use Serwist with Next.js.
+Since `Nextjs` `15.4.0-canary.28`, Serwist fails to build due to some compiler changes.
 
-## Usage
+## Reproduction
 
-[![Open in Gitpod and run](https://img.shields.io/badge/Open%20In-Gitpod.io-%231966D2?style=for-the-badge&logo=gitpod)](https://gitpod.io/#https://github.com/serwist/serwist/)
+1. `npm i --force` (force is used since serwist uses non canary next version)
+2. `npm run dev`
 
-```bash
-cd examples/next-basic
-pnpm build
-pnpm start
+See error:
+
+```
+ ⨯ ./app/sw.ts
+TypeError: Cannot read properties of undefined (reading 'traceChild')
+ ✓ Ready in 1923ms
+ ⨯ ./app/sw.ts
 ```
 
-or
+## Working build
 
-Execute [`degit`](https://github.com/Rich-Harris/degit) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), [pnpm](https://pnpm.io), or [bun](https://bun.sh) to bootstrap the example:
+1. Edit the `package.json` and downgrade to `15.4.0-canary.27`
+2. `rm -rf node_modules`
+3. `npm i --force`
+4. `npm run dev`
 
-```bash
-npx degit serwist/serwist/examples/next-basic my-app
+No errors and works as expected:
+
 ```
-
-```bash
-yarn degit serwist/serwist/examples/next-basic my-app
-```
-
-```bash
-pnpx degit serwist/serwist/examples/next-basic my-app
-```
-
-```bash
-bunx degit serwist/serwist/examples/next-basic my-app
-```
-
-## Recommended `.gitignore`
-
-```gitignore
-public/sw*
-public/swe-worker*
+ ✓ Starting...
+ ✓ (serwist) Bundling the service worker script with the URL '/sw.js' and the scope '/'...
+ ✓ Ready in 2s
 ```
