@@ -1,13 +1,19 @@
-import type { Metadata } from "next";
+'use client'
+import { useState } from "react";
 
-export const metadata: Metadata = {
-  title: "Home",
-};
+import { update } from "../actions";
+
 
 export default function Page() {
+  const [data, setData] = useState(0)
   return (
     <>
-      <h1>Next.js + Serwist</h1>
+      <h1>Turso Embedded Replica Is Broken</h1>
+
+      <button onClick={async () => {
+        const newData = await update()
+        setData(newData)
+      }}>Update {data}</button>
     </>
   );
 }

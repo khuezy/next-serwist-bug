@@ -1,24 +1,20 @@
-// @ts-check
-import withSerwistInit from "@serwist/next";
 
-// You may want to use a more robust revision to cache
-// files more efficiently.
-// A viable option is `git rev-parse HEAD`.
-const revision = crypto.randomUUID();
 
-const withSerwist = withSerwistInit({
-  cacheOnNavigation: true,
-  swSrc: "app/sw.ts",
-  swDest: "public/sw.js",
-  additionalPrecacheEntries: [{ url: "/~offline", revision }],
-});
 
 /** @type {import("next").NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
-    reactCompiler: true
+    // reactCompiler: true,
+    nodeMiddleware: true,
+  },
+  webpack: (config) => {
+    config.externals.push({
+      'node:crypto': 'commonjs crypto',
+      'node:fs': 'commonjs fs',
+    });
+    return config;
   }
 };
 
-export default withSerwist(nextConfig);
+export default (nextConfig);

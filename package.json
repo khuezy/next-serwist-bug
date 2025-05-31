@@ -8,14 +8,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "db:generate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push"
   },
   "dependencies": {
-    "@serwist/next": "9.0.14",
-    "next": "15.4.0-canary.28",
+    "@libsql/client": "0.15.8",
+    "next": "15.4.0-canary.27",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "serwist": "9.0.14"
+    "drizzle-kit": "beta",
+    "drizzle-orm": "beta"
   },
   "devDependencies": {
     "@types/node": "22.14.1",
